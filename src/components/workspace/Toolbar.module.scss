@@ -1,0 +1,170 @@
+@import '../../styles/mixins';
+
+// Toolbar - Dark Mode Neon Glassmorphism
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: $spacing-4;
+  padding: $spacing-2 $spacing-4;
+  background: $glass-bg;
+  backdrop-filter: blur($glass-blur);
+  -webkit-backdrop-filter: blur($glass-blur);
+  border-bottom: 1px solid $glass-border;
+  min-height: $canvas-toolbar-height;
+  flex-wrap: wrap;
+}
+
+.group {
+  display: flex;
+  align-items: center;
+  gap: $spacing-2;
+}
+
+.groupLabel {
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+  color: $text-muted;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.buttons {
+  display: flex;
+  gap: $spacing-1;
+}
+
+.btn {
+  @include flex-center;
+  gap: $spacing-1;
+  padding: $spacing-1 $spacing-2;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(4px);
+  border: 1px solid $glass-border;
+  border-radius: $radius-lg;
+  font-size: $font-size-xs;
+  color: $text-secondary;
+  cursor: pointer;
+  transition: all $transition-base;
+
+  &:hover:not(:disabled) {
+    background: rgba($neon-cyan, 0.1);
+    border-color: $neon-cyan;
+    color: $neon-cyan;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  &.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.btnLabel {
+  @media (max-width: $breakpoint-lg) {
+    display: none;
+  }
+}
+
+.colorDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  box-shadow: 0 0 6px currentColor;
+}
+
+.dropdown {
+  position: relative;
+
+  &:hover .dropdownContent {
+    display: block;
+  }
+}
+
+.dropdownContent {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: $spacing-1;
+  padding: $spacing-2;
+  background: rgba($bg-void, 0.95);
+  backdrop-filter: blur($glass-blur);
+  -webkit-backdrop-filter: blur($glass-blur);
+  border: 1px solid $glass-border;
+  border-radius: $radius-xl;
+  box-shadow: $shadow-glass-lg, $shadow-neon-cyan;
+  z-index: $z-dropdown;
+  min-width: 150px;
+}
+
+.dropdownItem {
+  display: flex;
+  align-items: center;
+  gap: $spacing-2;
+  width: 100%;
+  padding: $spacing-2 $spacing-3;
+  background: none;
+  border: none;
+  font-size: $font-size-sm;
+  color: $text-secondary;
+  cursor: pointer;
+  border-radius: $radius-lg;
+  transition: all $transition-base;
+
+  &:hover {
+    background: rgba($neon-cyan, 0.1);
+    color: $neon-cyan;
+  }
+}
+
+.divider {
+  width: 1px;
+  height: 24px;
+  background: $glass-border;
+}
+
+.zoomLevel {
+  min-width: 48px;
+  text-align: center;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+  color: $text-primary;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.status {
+  font-size: $font-size-xs;
+  color: $text-muted;
+}
+
+.selectedInfo {
+  display: flex;
+  align-items: center;
+  gap: $spacing-2;
+  color: $color-success;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  background: $color-success;
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+  box-shadow: 0 0 8px $color-success;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.hint {
+  color: $text-muted;
+}

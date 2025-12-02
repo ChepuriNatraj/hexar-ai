@@ -1,0 +1,361 @@
+@import '../../styles/mixins';
+
+// How It Works Section - Flowing Timeline Design
+.howItWorks {
+  padding: $spacing-20 0;
+  background: transparent;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.container {
+  @include container;
+}
+
+.header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto $spacing-16;
+}
+
+.title {
+  @include heading-2;
+  margin-bottom: $spacing-4;
+  @include gradient-text;
+}
+
+.subtitle {
+  @include body-text;
+  color: $text-secondary;
+}
+
+// Timeline Container
+.steps {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+  
+  // Main timeline line (vertical on mobile, horizontal on desktop)
+  &::before {
+    content: '';
+    position: absolute;
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      rgba($neon-cyan, 0.3) 10%,
+      rgba($neon-cyan, 0.5) 50%,
+      rgba($neon-purple, 0.3) 90%,
+      transparent 100%
+    );
+    
+    // Mobile: vertical line
+    left: 40px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    box-shadow: 0 0 15px rgba($neon-cyan, 0.4);
+    
+    @include md {
+      // Desktop: horizontal line
+      left: 10%;
+      right: 10%;
+      top: 60px;
+      bottom: auto;
+      width: auto;
+      height: 2px;
+      background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba($neon-cyan, 0.5) 15%,
+        rgba($neon-cyan, 0.8) 30%,
+        rgba($neon-blue, 0.8) 50%,
+        rgba($neon-purple, 0.8) 70%,
+        rgba($neon-purple, 0.5) 85%,
+        transparent 100%
+      );
+    }
+  }
+  
+  // Animated glow pulse on timeline
+  &::after {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: $neon-cyan;
+    border-radius: 50%;
+    box-shadow: 0 0 20px $neon-cyan, 0 0 40px $neon-cyan;
+    animation: travelDot 4s ease-in-out infinite;
+    
+    // Mobile position
+    left: 37px;
+    top: 0;
+    
+    @include md {
+      // Desktop position
+      left: 10%;
+      top: 57px;
+      animation: travelDotHorizontal 4s ease-in-out infinite;
+    }
+  }
+}
+
+// Travel dot animation (vertical for mobile)
+@keyframes travelDot {
+  0%, 100% {
+    top: 5%;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    top: 95%;
+    opacity: 0;
+  }
+}
+
+// Travel dot animation (horizontal for desktop)
+@keyframes travelDotHorizontal {
+  0%, 100% {
+    left: 10%;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    left: 90%;
+    opacity: 0;
+  }
+}
+
+// Individual Step
+.step {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: $spacing-6;
+  margin-bottom: $spacing-10;
+  padding-left: $spacing-4;
+  
+  // Stagger animation on load
+  animation: fadeSlideIn 0.6s ease-out backwards;
+  
+  &:nth-child(1) { animation-delay: 0.1s; }
+  &:nth-child(2) { animation-delay: 0.3s; }
+  &:nth-child(3) { animation-delay: 0.5s; }
+  &:nth-child(4) { animation-delay: 0.7s; }
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+  
+  @include md {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 0;
+    padding-left: 0;
+    gap: $spacing-4;
+  }
+}
+
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Step Number - The main dot on timeline
+.stepNumber {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  flex-shrink: 0;
+  background: $bg-void;
+  border-radius: 50%;
+  @include flex-center;
+  z-index: 2;
+  
+  // Outer glow ring
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, $neon-cyan, $neon-blue, $neon-purple);
+    z-index: -1;
+    animation: rotateGlow 3s linear infinite;
+  }
+  
+  // Inner circle
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    background: $bg-void;
+    border-radius: 50%;
+    z-index: -1;
+  }
+  
+  span {
+    font-size: $font-size-2xl;
+    font-weight: $font-weight-bold;
+    background: linear-gradient(135deg, $neon-cyan, $neon-blue);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  // Hover pulse effect
+  .step:hover & {
+    &::before {
+      animation: rotateGlow 1.5s linear infinite, pulseRing 1s ease-out;
+    }
+  }
+}
+
+@keyframes rotateGlow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulseRing {
+  0% {
+    box-shadow: 0 0 0 0 rgba($neon-cyan, 0.6);
+  }
+  100% {
+    box-shadow: 0 0 0 20px rgba($neon-cyan, 0);
+  }
+}
+
+// Step Content
+.stepContent {
+  flex: 1;
+  padding-top: $spacing-2;
+  
+  @include md {
+    padding-top: 0;
+  }
+}
+
+// Step Icon
+.stepIcon {
+  @include flex-center;
+  width: 52px;
+  height: 52px;
+  margin-bottom: $spacing-4;
+  background: rgba($neon-cyan, 0.08);
+  backdrop-filter: blur(8px);
+  border-radius: $radius-xl;
+  color: $neon-cyan;
+  border: 1px solid rgba($neon-cyan, 0.2);
+  transition: all 0.3s ease;
+  
+  @include md {
+    margin: 0 auto $spacing-4;
+  }
+  
+  .step:hover & {
+    background: rgba($neon-cyan, 0.15);
+    border-color: rgba($neon-cyan, 0.4);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba($neon-cyan, 0.2);
+  }
+}
+
+// Step Title
+.stepTitle {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  margin-bottom: $spacing-2;
+  color: $text-primary;
+  transition: color 0.3s ease;
+  
+  .step:hover & {
+    color: $neon-cyan;
+  }
+}
+
+// Step Description
+.stepDescription {
+  font-size: $font-size-sm;
+  color: $text-secondary;
+  line-height: $line-height-relaxed;
+  max-width: 280px;
+  
+  @include md {
+    margin: 0 auto;
+    max-width: 200px;
+  }
+}
+
+// Connector dots between steps (mobile only)
+.connector {
+  display: none;
+}
+
+// Desktop grid layout
+@include md {
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: $spacing-4;
+  }
+}
+
+// Extra: Floating particles decoration
+.howItWorks::before {
+  content: '';
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba($neon-cyan, 0.08) 0%, transparent 70%);
+  border-radius: 50%;
+  top: 20%;
+  left: -100px;
+  animation: floatBlob 8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.howItWorks::after {
+  content: '';
+  position: absolute;
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(circle, rgba($neon-purple, 0.08) 0%, transparent 70%);
+  border-radius: 50%;
+  bottom: 10%;
+  right: -80px;
+  animation: floatBlob 8s ease-in-out infinite reverse;
+  pointer-events: none;
+}
+
+@keyframes floatBlob {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(30px, -30px) scale(1.1);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.95);
+  }
+}

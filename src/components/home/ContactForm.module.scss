@@ -1,0 +1,143 @@
+@import '../../styles/mixins';
+
+// Contact Form Section - Dark Mode Neon Glassmorphism
+.contact {
+  padding: $spacing-20 0;
+  background: transparent;
+  position: relative;
+  z-index: 1;
+}
+
+.container {
+  @include container;
+  max-width: 600px;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: $spacing-10;
+}
+
+.title {
+  @include heading-2;
+  margin-bottom: $spacing-4;
+  @include gradient-text;
+}
+
+.subtitle {
+  @include body-text;
+  color: $text-secondary;
+}
+
+.form {
+  @include glass;
+  border-radius: $radius-2xl;
+  padding: $spacing-8;
+  
+  @include sm {
+    padding: $spacing-10;
+  }
+}
+
+.row {
+  display: grid;
+  gap: $spacing-4;
+
+  @include sm {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.field {
+  margin-bottom: $spacing-5;
+}
+
+.label {
+  display: block;
+  margin-bottom: $spacing-2;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  color: $text-primary;
+}
+
+.input,
+.textarea {
+  @include input-base;
+
+  &:focus {
+    border-color: $neon-cyan;
+    box-shadow: 0 0 0 4px rgba($neon-cyan, 0.1), $shadow-neon-cyan;
+  }
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.inputError {
+  border-color: $color-error;
+
+  &:focus {
+    border-color: $color-error;
+    box-shadow: 0 0 0 3px rgba($color-error, 0.2), 0 0 15px rgba($color-error, 0.3);
+  }
+}
+
+.error {
+  display: block;
+  margin-top: $spacing-1;
+  font-size: $font-size-xs;
+  color: $color-error;
+}
+
+.submitBtn {
+  @include button-primary;
+  width: 100%;
+  padding: $spacing-4;
+  font-size: $font-size-lg;
+  margin-top: $spacing-4;
+
+  &:disabled {
+    background: rgba(255, 255, 255, 0.1);
+    color: $text-muted;
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+}
+
+.spinner {
+  animation: spin 1s linear infinite;
+  color: $neon-cyan;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.successMessage {
+  margin-top: $spacing-4;
+  padding: $spacing-4;
+  background: rgba($color-success, 0.15);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba($color-success, 0.3);
+  border-radius: $radius-xl;
+  color: $color-success;
+  font-size: $font-size-sm;
+  text-align: center;
+  box-shadow: 0 0 15px rgba($color-success, 0.2);
+}
+
+.errorMessage {
+  margin-top: $spacing-4;
+  padding: $spacing-4;
+  background: rgba($color-error, 0.15);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba($color-error, 0.3);
+  border-radius: $radius-xl;
+  color: $color-error;
+  font-size: $font-size-sm;
+  text-align: center;
+  box-shadow: 0 0 15px rgba($color-error, 0.2);
+}

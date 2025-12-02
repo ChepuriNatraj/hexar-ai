@@ -1,0 +1,267 @@
+@import '../../styles/mixins';
+
+// Auth Modal - Dark Mode Neon Glassmorphism
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba($bg-void, 0.85);
+  backdrop-filter: blur(12px);
+  z-index: $z-modal-backdrop;
+  @include flex-center;
+  padding: $spacing-4;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modal {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  max-height: 90vh;
+  overflow-y: auto;
+  @include glass;
+  border-radius: $radius-2xl;
+  padding: $spacing-8;
+  animation: slideUp 0.3s ease;
+  @include custom-scrollbar;
+  box-shadow: 
+    $shadow-neon-cyan,
+    0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.closeBtn {
+  position: absolute;
+  top: $spacing-4;
+  right: $spacing-4;
+  @include button-ghost;
+  padding: $spacing-2;
+  color: $text-muted;
+  transition: all $transition-fast;
+
+  &:hover {
+    color: $neon-cyan;
+    transform: rotate(90deg);
+  }
+}
+
+.header {
+  text-align: center;
+  margin-bottom: $spacing-6;
+}
+
+.title {
+  font-size: $font-size-2xl;
+  font-weight: $font-weight-bold;
+  margin-bottom: $spacing-2;
+  @include gradient-text;
+}
+
+.subtitle {
+  font-size: $font-size-sm;
+  color: $text-secondary;
+}
+
+.form {
+  margin-bottom: $spacing-6;
+}
+
+.field {
+  margin-bottom: $spacing-4;
+}
+
+.label {
+  display: block;
+  margin-bottom: $spacing-2;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  color: $text-primary;
+}
+
+.inputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.inputIcon {
+  position: absolute;
+  left: $spacing-3;
+  color: $text-muted;
+  pointer-events: none;
+  transition: color $transition-fast;
+}
+
+.inputWrapper:focus-within .inputIcon {
+  color: $neon-cyan;
+}
+
+.input {
+  @include input-base;
+  padding-left: 44px;
+  padding-right: 44px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid $glass-border;
+  color: $text-primary;
+  
+  &::placeholder {
+    color: $text-muted;
+  }
+  
+  &:focus {
+    border-color: $neon-cyan;
+    box-shadow: 0 0 0 3px rgba($neon-cyan, 0.15);
+    background: rgba(255, 255, 255, 0.03);
+  }
+}
+
+.inputError {
+  border-color: $color-error;
+
+  &:focus {
+    border-color: $color-error;
+    box-shadow: 0 0 0 3px rgba($color-error, 0.2);
+  }
+}
+
+.passwordToggle {
+  position: absolute;
+  right: $spacing-2;
+  @include button-ghost;
+  padding: $spacing-2;
+  color: $text-muted;
+
+  &:hover {
+    color: $neon-cyan;
+  }
+}
+
+.error {
+  display: block;
+  margin-top: $spacing-1;
+  font-size: $font-size-xs;
+  color: $color-error;
+}
+
+.submitError {
+  padding: $spacing-3;
+  margin-bottom: $spacing-4;
+  background: rgba($color-error, 0.15);
+  border: 1px solid rgba($color-error, 0.4);
+  border-radius: $radius-md;
+  color: $color-error;
+  font-size: $font-size-sm;
+  text-align: center;
+}
+
+.submitBtn {
+  @include button-primary;
+  width: 100%;
+  padding: $spacing-3 $spacing-4;
+  font-size: $font-size-base;
+  margin-bottom: $spacing-4;
+  position: relative;
+  overflow: hidden;
+  @include button-shine;
+}
+
+.forgotPassword {
+  display: block;
+  text-align: center;
+  font-size: $font-size-sm;
+  color: $neon-cyan;
+  text-decoration: none;
+  margin-bottom: $spacing-4;
+  transition: text-shadow $transition-fast;
+
+  &:hover {
+    text-decoration: underline;
+    text-shadow: 0 0 10px rgba($neon-cyan, 0.5);
+  }
+}
+
+.switchMode {
+  text-align: center;
+  font-size: $font-size-sm;
+  color: $text-secondary;
+}
+
+.switchBtn {
+  background: none;
+  border: none;
+  color: $neon-cyan;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  margin-left: $spacing-1;
+  transition: text-shadow $transition-fast;
+
+  &:hover {
+    text-decoration: underline;
+    text-shadow: 0 0 10px rgba($neon-cyan, 0.5);
+  }
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  margin-bottom: $spacing-6;
+
+  &::before,
+  &::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: $glass-border;
+  }
+
+  span {
+    padding: 0 $spacing-4;
+    font-size: $font-size-sm;
+    color: $text-muted;
+  }
+}
+
+.oauth {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $spacing-3;
+}
+
+.oauthBtn {
+  @include button-base;
+  background: $glass-bg;
+  backdrop-filter: blur(8px);
+  color: $text-primary;
+  border: 1px solid $glass-border;
+  border-radius: $radius-xl;
+  gap: $spacing-2;
+
+  &:hover:not(:disabled) {
+    background: $glass-bg-hover;
+    border-color: $neon-cyan;
+    color: $neon-cyan;
+    box-shadow: 0 0 15px rgba($neon-cyan, 0.2);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}

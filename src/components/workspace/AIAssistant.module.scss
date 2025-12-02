@@ -1,0 +1,390 @@
+@import '../../styles/mixins';
+
+// AI Assistant - Dark Mode Neon Glassmorphism
+// Now embedded in floating panel from Workspace
+.assistant {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  height: 100%;
+  min-height: 0; // Allow flex shrinking
+  width: 100%;
+  overflow: hidden;
+
+  @media (max-width: $breakpoint-md) {
+    max-height: calc(60vh - 60px);
+  }
+}
+
+// Header is now handled by parent Workspace component
+// Keeping these for backwards compatibility but hiding
+.header {
+  display: none;
+}
+
+.headerIcon {
+  display: none;
+}
+
+.headerInfo {
+  display: none;
+}
+
+.headerTitle {
+  display: none;
+}
+
+.headerStatus {
+  display: none;
+}
+
+.statusDot {
+  width: 8px;
+  height: 8px;
+  background: $color-success;
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+  box-shadow: 0 0 8px $color-success;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: $spacing-4;
+  @include custom-scrollbar;
+}
+
+.message {
+  display: flex;
+  gap: $spacing-2;
+  margin-bottom: $spacing-4;
+  animation: slideIn 0.3s ease;
+
+  &.user {
+    flex-direction: row-reverse;
+
+    .messageContent {
+      background: linear-gradient(135deg, $neon-cyan 0%, $neon-blue 100%);
+      color: $bg-void;
+      border-radius: $radius-xl $radius-xl 0 $radius-xl;
+    }
+
+    .messageIcon {
+      background: $neon-cyan;
+      color: $bg-void;
+    }
+
+    .messageTime {
+      text-align: right;
+      color: rgba($bg-void, 0.7);
+    }
+  }
+
+  &.assistant {
+    .messageContent {
+      background: $glass-bg;
+      backdrop-filter: blur(8px);
+      border: 1px solid $glass-border;
+      color: $text-primary;
+      border-radius: $radius-xl $radius-xl $radius-xl 0;
+    }
+
+    .messageIcon {
+      background: rgba($neon-cyan, 0.15);
+      color: $neon-cyan;
+    }
+  }
+
+  &.system {
+    .messageContent {
+      background: rgba($color-warning, 0.15);
+      backdrop-filter: blur(8px);
+      color: $color-warning;
+      border-radius: $radius-xl;
+      font-size: $font-size-sm;
+      padding: $spacing-2 $spacing-3;
+    }
+
+    .messageIcon {
+      background: rgba($color-warning, 0.2);
+      color: $color-warning;
+    }
+  }
+
+  &.error {
+    .messageContent {
+      background: rgba($color-error, 0.15);
+      color: $color-error;
+      border-radius: $radius-lg;
+    }
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.messageIcon {
+  @include flex-center;
+  width: 28px;
+  height: 28px;
+  border-radius: $radius-full;
+  flex-shrink: 0;
+}
+
+.messageContent {
+  max-width: 80%;
+  padding: $spacing-3 $spacing-4;
+
+  p {
+    margin: 0;
+    line-height: $line-height-relaxed;
+    font-size: $font-size-sm;
+  }
+}
+
+.messageTime {
+  display: block;
+  margin-top: $spacing-1;
+  font-size: $font-size-xs;
+  color: $text-muted;
+}
+
+.typing {
+  display: flex;
+  gap: 4px;
+  padding: $spacing-2 0;
+
+  span {
+    width: 8px;
+    height: 8px;
+    background: $neon-cyan;
+    border-radius: 50%;
+    animation: typing 1.4s infinite ease-in-out;
+
+    &:nth-child(1) { animation-delay: 0s; }
+    &:nth-child(2) { animation-delay: 0.2s; }
+    &:nth-child(3) { animation-delay: 0.4s; }
+  }
+}
+
+@keyframes typing {
+  0%, 60%, 100% { transform: translateY(0); }
+  30% { transform: translateY(-8px); }
+}
+
+// Troubleshooting Steps
+.troubleshootingSteps {
+  margin: $spacing-4 0;
+  padding: $spacing-4;
+  background: $glass-bg;
+  backdrop-filter: blur(8px);
+  border: 1px solid $glass-border;
+  border-radius: $radius-2xl;
+}
+
+.stepsTitle {
+  display: flex;
+  align-items: center;
+  gap: $spacing-2;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  color: $text-primary;
+  margin-bottom: $spacing-4;
+}
+
+.stepsList {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-2;
+}
+
+.step {
+  display: flex;
+  align-items: flex-start;
+  gap: $spacing-3;
+  padding: $spacing-3;
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(4px);
+  border-radius: $radius-xl;
+  cursor: pointer;
+  transition: all $transition-base;
+
+  &:hover {
+    background: rgba($neon-cyan, 0.05);
+    transform: translateX(4px);
+  }
+
+  &.completed {
+    background: rgba($color-success, 0.1);
+
+    .stepNumber {
+      background: $color-success;
+      color: $bg-void;
+      box-shadow: 0 0 10px rgba($color-success, 0.5);
+    }
+
+    .stepTitle {
+      text-decoration: line-through;
+      color: $text-muted;
+    }
+  }
+}
+
+.stepNumber {
+  @include flex-center;
+  width: 28px;
+  height: 28px;
+  background: linear-gradient(135deg, $neon-cyan 0%, $neon-blue 100%);
+  color: $bg-void;
+  border-radius: $radius-full;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  flex-shrink: 0;
+  box-shadow: $shadow-neon-cyan;
+}
+
+.stepContent {
+  flex: 1;
+  min-width: 0;
+}
+
+.stepTitle {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  color: $text-primary;
+  margin-bottom: $spacing-1;
+}
+
+.stepDescription {
+  font-size: $font-size-xs;
+  color: $text-secondary;
+  line-height: $line-height-relaxed;
+  margin: 0;
+}
+
+.stepArrow {
+  color: $text-muted;
+  margin-top: $spacing-1;
+  transition: transform $transition-fast;
+
+  .step:hover & {
+    transform: translateX(4px);
+    color: $neon-cyan;
+  }
+}
+
+// Quick Actions
+.quickActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-2;
+  padding: $spacing-3 $spacing-4;
+  border-top: 1px solid $glass-border;
+}
+
+.quickAction {
+  padding: $spacing-2 $spacing-3;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(8px);
+  border: 1px solid $glass-border;
+  border-radius: $radius-full;
+  font-size: $font-size-xs;
+  color: $text-secondary;
+  cursor: pointer;
+  transition: all $transition-base;
+
+  &:hover {
+    background: $neon-cyan;
+    color: $bg-void;
+    border-color: $neon-cyan;
+    box-shadow: $shadow-neon-cyan;
+  }
+}
+
+// Input Area
+.inputArea {
+  display: flex;
+  gap: $spacing-2;
+  padding: $spacing-4;
+  border-top: 1px solid $glass-border;
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(8px);
+}
+
+.input {
+  flex: 1;
+  padding: $spacing-3;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(4px);
+  border: 1px solid $glass-border;
+  border-radius: $radius-xl;
+  font-size: $font-size-sm;
+  resize: none;
+  max-height: 100px;
+  line-height: $line-height-normal;
+  color: $text-primary;
+
+  &:focus {
+    outline: none;
+    border-color: $neon-cyan;
+    background: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 0 0 4px rgba($neon-cyan, 0.1);
+  }
+
+  &::placeholder {
+    color: $text-muted;
+  }
+
+  &:disabled {
+    background: rgba(255, 255, 255, 0.01);
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+}
+
+.sendBtn {
+  @include flex-center;
+  width: 44px;
+  height: 44px;
+  background: linear-gradient(135deg, $neon-cyan 0%, $neon-blue 100%);
+  color: $bg-void;
+  border: none;
+  border-radius: $radius-xl;
+  cursor: pointer;
+  transition: all $transition-base;
+  box-shadow: $shadow-neon-cyan;
+
+  &:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba($neon-cyan, 0.5);
+  }
+
+  &:disabled {
+    background: $glass-border;
+    cursor: not-allowed;
+    box-shadow: none;
+    color: $text-muted;
+  }
+}
+
+.spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}

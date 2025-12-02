@@ -1,0 +1,318 @@
+@import '../../styles/mixins';
+
+// Floating Pill Navbar - Dark Mode Neon Glassmorphism
+.header {
+  position: fixed;
+  top: $spacing-4;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - $spacing-8);
+  max-width: 1100px;
+  z-index: $z-sticky;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur($glass-blur-heavy) saturate($glass-saturate);
+  -webkit-backdrop-filter: blur($glass-blur-heavy) saturate($glass-saturate);
+  border: 1px solid $glass-border;
+  border-radius: $radius-full;
+  transition: all $transition-base;
+  box-shadow: $shadow-glass;
+
+  &.scrolled {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba($neon-cyan, 0.2);
+    box-shadow: $shadow-neon-cyan, $shadow-glass-lg;
+  }
+}
+
+.nav {
+  @include flex-between;
+  height: 64px;
+  padding: 0 $spacing-6;
+  position: relative;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: $spacing-2;
+  text-decoration: none;
+  z-index: $z-sticky + 1;
+}
+
+.logoIcon {
+  width: 36px;
+  height: 36px;
+  filter: drop-shadow(0 0 8px rgba($neon-cyan, 0.5));
+}
+
+.logoText {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
+  color: $text-primary;
+
+  span {
+    @include gradient-text;
+  }
+}
+
+.navLinks {
+  display: none;
+  align-items: center;
+  gap: $spacing-1;
+
+  @include lg {
+    display: flex;
+  }
+}
+
+.navLink {
+  padding: $spacing-2 $spacing-4;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  color: $text-secondary;
+  text-decoration: none;
+  border-radius: $radius-lg;
+  transition: all $transition-base;
+
+  &:hover {
+    color: $neon-cyan;
+    background: rgba($neon-cyan, 0.08);
+    text-shadow: 0 0 10px rgba($neon-cyan, 0.5);
+  }
+}
+
+.actions {
+  display: none;
+  align-items: center;
+  gap: $spacing-3;
+
+  @include lg {
+    display: flex;
+  }
+}
+
+.demoBtn {
+  @include button-base;
+  padding: $spacing-2 $spacing-4;
+  font-size: $font-size-sm;
+  background: rgba($neon-cyan, 0.1);
+  color: $neon-cyan;
+  border: 1px solid rgba($neon-cyan, 0.3);
+  backdrop-filter: blur(8px);
+
+  &:hover {
+    background: $neon-cyan;
+    color: $bg-void;
+    border-color: $neon-cyan;
+    box-shadow: $shadow-neon-cyan;
+  }
+}
+
+.loginBtn {
+  @include button-ghost;
+  padding: $spacing-2 $spacing-4;
+  font-size: $font-size-sm;
+  color: $text-secondary;
+  
+  &:hover {
+    color: $text-primary;
+  }
+}
+
+.registerBtn {
+  @include button-primary;
+  padding: $spacing-2 $spacing-4;
+  font-size: $font-size-sm;
+}
+
+.userMenu {
+  position: relative;
+}
+
+.userBtn {
+  @include button-ghost;
+  display: flex;
+  align-items: center;
+  gap: $spacing-2;
+  padding: $spacing-2 $spacing-3;
+  font-size: $font-size-sm;
+  color: $text-secondary;
+  
+  &:hover {
+    color: $neon-cyan;
+  }
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  min-width: 180px;
+  margin-top: $spacing-2;
+  padding: $spacing-2;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur($glass-blur-heavy) saturate($glass-saturate);
+  -webkit-backdrop-filter: blur($glass-blur-heavy) saturate($glass-saturate);
+  border: 1px solid $glass-border;
+  border-radius: $radius-xl;
+  box-shadow: $shadow-glass-lg, $shadow-neon-mixed;
+  z-index: $z-dropdown;
+}
+
+.dropdownItem {
+  display: flex;
+  align-items: center;
+  gap: $spacing-2;
+  width: 100%;
+  padding: $spacing-2 $spacing-3;
+  font-size: $font-size-sm;
+  color: $text-secondary;
+  text-decoration: none;
+  background: transparent;
+  border: none;
+  border-radius: $radius-lg;
+  cursor: pointer;
+  transition: all $transition-base;
+
+  &:hover {
+    background: rgba($neon-cyan, 0.1);
+    color: $neon-cyan;
+  }
+}
+
+.dropdownDivider {
+  margin: $spacing-2 0;
+  border: none;
+  border-top: 1px solid $glass-border;
+}
+
+.menuToggle {
+  @include button-ghost;
+  padding: $spacing-2;
+  z-index: $z-sticky + 1;
+  color: $text-secondary;
+  
+  &:hover {
+    color: $neon-cyan;
+  }
+
+  @include lg {
+    display: none;
+  }
+}
+
+.mobileNav {
+  position: fixed;
+  top: 90px;
+  left: $spacing-4;
+  right: $spacing-4;
+  bottom: auto;
+  max-height: calc(100vh - 120px);
+  // More opaque background for better visibility
+  background: rgba($bg-void, 0.95);
+  backdrop-filter: blur($glass-blur-heavy) saturate($glass-saturate);
+  -webkit-backdrop-filter: blur($glass-blur-heavy) saturate($glass-saturate);
+  border: 1px solid rgba($neon-cyan, 0.2);
+  border-radius: $radius-2xl;
+  padding: $spacing-6;
+  overflow-y: auto;
+  z-index: $z-sticky + 10;
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.6),
+    0 0 30px rgba($neon-cyan, 0.15),
+    0 0 60px rgba($neon-purple, 0.1);
+
+  @include lg {
+    display: none;
+  }
+}
+
+.mobileNavLinks {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-2;
+  list-style: none;
+}
+
+.mobileNavLink {
+  display: block;
+  padding: $spacing-3 $spacing-4;
+  font-size: $font-size-base;
+  font-weight: $font-weight-medium;
+  color: $text-primary;
+  text-decoration: none;
+  border-radius: $radius-xl;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all $transition-base;
+
+  &:hover,
+  &:focus {
+    background: rgba($neon-cyan, 0.15);
+    border-color: rgba($neon-cyan, 0.4);
+    color: $neon-cyan;
+    transform: translateX(4px);
+    box-shadow: 0 0 15px rgba($neon-cyan, 0.2);
+  }
+}
+
+.mobileActions {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-3;
+  margin-top: $spacing-6;
+  padding-top: $spacing-6;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mobileDemoBtn {
+  @include button-base;
+  width: 100%;
+  justify-content: center;
+  padding: $spacing-3 $spacing-4;
+  font-size: $font-size-base;
+  font-weight: $font-weight-semibold;
+  background: linear-gradient(135deg, $neon-cyan 0%, $neon-blue 100%);
+  color: $bg-void;
+  border: none;
+  box-shadow: $shadow-neon-cyan;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba($neon-cyan, 0.4);
+  }
+}
+
+.mobileLoginBtn {
+  @include button-base;
+  width: 100%;
+  justify-content: center;
+  padding: $spacing-3 $spacing-4;
+  font-size: $font-size-base;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: $text-primary;
+  
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba($neon-cyan, 0.4);
+    color: $neon-cyan;
+  }
+}
+
+.mobileRegisterBtn {
+  @include button-base;
+  width: 100%;
+  justify-content: center;
+  padding: $spacing-3 $spacing-4;
+  font-size: $font-size-base;
+  font-weight: $font-weight-semibold;
+  background: transparent;
+  border: 2px solid $neon-cyan;
+  color: $neon-cyan;
+  
+  &:hover {
+    background: rgba($neon-cyan, 0.1);
+    box-shadow: 0 0 20px rgba($neon-cyan, 0.3);
+  }
+}

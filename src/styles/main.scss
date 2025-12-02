@@ -1,0 +1,687 @@
+// =========================================
+// Main SCSS Entry Point
+// Hexar.ai - Global Styles
+// Dark Mode Neon Glassmorphism Theme
+// =========================================
+
+@import 'variables';
+@import 'mixins';
+
+// CSS Reset & Base Styles
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: $font-family-base;
+  font-size: $font-size-base;
+  line-height: $line-height-normal;
+  color: $text-primary;
+  background: $bg-void;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+  
+  // Animated mesh gradient background
+  &::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      radial-gradient(ellipse 80% 80% at 20% 20%, rgba($neon-cyan, 0.15) 0%, transparent 50%),
+      radial-gradient(ellipse 60% 60% at 80% 30%, rgba($neon-purple, 0.12) 0%, transparent 50%),
+      radial-gradient(ellipse 70% 70% at 40% 80%, rgba($neon-purple, 0.1) 0%, transparent 50%),
+      radial-gradient(ellipse 50% 50% at 70% 70%, rgba($neon-cyan, 0.08) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+    animation: blob-move 20s ease-in-out infinite;
+  }
+  
+  // Secondary animated layer
+  &::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      radial-gradient(circle at 50% 50%, rgba($neon-cyan, 0.03) 0%, transparent 40%),
+      radial-gradient(circle at 80% 20%, rgba($neon-purple, 0.05) 0%, transparent 30%);
+    pointer-events: none;
+    z-index: 0;
+    animation: blob-move 25s ease-in-out infinite reverse;
+  }
+}
+
+// App Container
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  position: relative;
+  z-index: 1;
+}
+
+.main-content {
+  flex: 1;
+  padding-top: $header-height;
+  position: relative;
+  z-index: 1;
+}
+
+// =====================
+// GLOBAL FLOATING PARTICLES
+// =====================
+.global-particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.global-particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  opacity: 0;
+  animation: globalParticleFloat 20s ease-in-out infinite;
+  
+  &--cyan {
+    background: $neon-cyan;
+    box-shadow: 0 0 8px $neon-cyan, 0 0 16px rgba($neon-cyan, 0.5);
+  }
+  
+  &--purple {
+    background: $neon-purple;
+    box-shadow: 0 0 8px $neon-purple, 0 0 16px rgba($neon-purple, 0.5);
+  }
+  
+  &--blue {
+    background: $neon-blue;
+    box-shadow: 0 0 8px $neon-blue, 0 0 16px rgba($neon-blue, 0.5);
+  }
+  
+  // Different positions and timings
+  &:nth-child(1) { left: 5%; top: 15%; animation-delay: 0s; }
+  &:nth-child(2) { left: 15%; top: 80%; animation-delay: 2s; }
+  &:nth-child(3) { left: 25%; top: 40%; animation-delay: 4s; width: 3px; height: 3px; }
+  &:nth-child(4) { left: 35%; top: 90%; animation-delay: 6s; }
+  &:nth-child(5) { left: 45%; top: 20%; animation-delay: 8s; width: 5px; height: 5px; }
+  &:nth-child(6) { left: 55%; top: 70%; animation-delay: 10s; }
+  &:nth-child(7) { left: 65%; top: 30%; animation-delay: 12s; width: 3px; height: 3px; }
+  &:nth-child(8) { left: 75%; top: 85%; animation-delay: 14s; }
+  &:nth-child(9) { left: 85%; top: 45%; animation-delay: 16s; }
+  &:nth-child(10) { left: 92%; top: 10%; animation-delay: 18s; width: 5px; height: 5px; }
+  &:nth-child(11) { left: 8%; top: 55%; animation-delay: 1s; }
+  &:nth-child(12) { left: 50%; top: 5%; animation-delay: 3s; width: 3px; height: 3px; }
+}
+
+@keyframes globalParticleFloat {
+  0%, 100% {
+    opacity: 0;
+    transform: translateY(0) translateX(0) scale(0.5);
+  }
+  5% {
+    opacity: 0.7;
+    transform: translateY(-10px) translateX(5px) scale(1);
+  }
+  25% {
+    opacity: 0.5;
+    transform: translateY(-60px) translateX(-10px) scale(0.9);
+  }
+  50% {
+    opacity: 0.6;
+    transform: translateY(-120px) translateX(15px) scale(0.8);
+  }
+  75% {
+    opacity: 0.4;
+    transform: translateY(-180px) translateX(-5px) scale(0.7);
+  }
+  95% {
+    opacity: 0.2;
+    transform: translateY(-220px) translateX(10px) scale(0.6);
+  }
+}
+
+// Typography - Dark Mode
+h1, h2, h3, h4, h5, h6 {
+  color: $text-primary;
+  font-weight: $font-weight-bold;
+  line-height: $line-height-tight;
+}
+
+h1 { @include heading-1; }
+h2 { @include heading-2; }
+h3 { @include heading-3; }
+
+p {
+  color: $text-secondary;
+  line-height: $line-height-relaxed;
+}
+
+a {
+  color: $neon-cyan;
+  text-decoration: none;
+  transition: color $transition-fast, text-shadow $transition-fast;
+
+  &:hover {
+    color: lighten($neon-cyan, 10%);
+    text-shadow: 0 0 10px rgba($neon-cyan, 0.5);
+  }
+}
+
+// Images
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+// Lists
+ul, ol {
+  list-style: none;
+}
+
+// Buttons
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+// Form Elements
+input, textarea, select {
+  font-family: inherit;
+}
+
+// Container Class
+.container {
+  @include container;
+}
+
+// Section Styles - Dark Mode
+.section {
+  padding: $spacing-16 0;
+  position: relative;
+  z-index: 1;
+
+  @include md {
+    padding: $spacing-20 0;
+  }
+
+  @include lg {
+    padding: $spacing-24 0;
+  }
+
+  &--gray {
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(8px);
+  }
+
+  &--dark {
+    background: $glass-bg-dark;
+    backdrop-filter: blur($glass-blur);
+    color: $text-light;
+
+    h1, h2, h3, h4, h5, h6, p {
+      color: $text-light;
+    }
+  }
+  
+  &--glass {
+    @include glass;
+    margin: $spacing-4;
+    border-radius: $radius-2xl;
+    
+    @include md {
+      margin: $spacing-6;
+    }
+  }
+}
+
+.section__header {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto $spacing-12;
+}
+
+.section__title {
+  margin-bottom: $spacing-4;
+  @include gradient-text;
+}
+
+.section__subtitle {
+  @include body-text;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+// Button Classes
+.btn {
+  @include button-base;
+}
+
+.btn--primary {
+  @include button-primary;
+}
+
+.btn--secondary {
+  @include button-secondary;
+}
+
+.btn--ghost {
+  @include button-ghost;
+}
+
+.btn--lg {
+  padding: $spacing-4 $spacing-8;
+  font-size: $font-size-lg;
+}
+
+.btn--sm {
+  padding: $spacing-2 $spacing-4;
+  font-size: $font-size-sm;
+}
+
+// Card Classes
+.card {
+  @include card;
+  padding: $spacing-6;
+}
+
+// Input Classes - Dark Mode
+.input {
+  @include input-base;
+}
+
+.input-group {
+  margin-bottom: $spacing-4;
+
+  label {
+    display: block;
+    margin-bottom: $spacing-2;
+    font-weight: $font-weight-medium;
+    color: $text-primary;
+  }
+}
+
+// Utility Classes
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+.mt-4 { margin-top: $spacing-4; }
+.mt-8 { margin-top: $spacing-8; }
+.mb-4 { margin-bottom: $spacing-4; }
+.mb-8 { margin-bottom: $spacing-8; }
+
+.hidden { display: none; }
+
+.sr-only {
+  @include visually-hidden;
+}
+
+// Grid System
+.grid {
+  display: grid;
+  gap: $spacing-6;
+
+  &--2 {
+    @include md {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  &--3 {
+    @include md {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @include lg {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  &--4 {
+    grid-template-columns: repeat(2, 1fr);
+    @include md {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    @include lg {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+}
+
+// Animation Classes
+.fade-in {
+  @include fade-in;
+}
+
+.slide-up {
+  @include slide-up;
+}
+
+// Custom Scrollbar
+body {
+  @include custom-scrollbar;
+}
+
+// Focus Styles for Accessibility - Dark Mode Neon
+:focus-visible {
+  outline: 2px solid $neon-cyan;
+  outline-offset: 2px;
+}
+
+// Skip to Main Content Link
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: $neon-cyan;
+  color: $bg-void;
+  padding: $spacing-2 $spacing-4;
+  z-index: $z-tooltip;
+  transition: top $transition-fast;
+
+  &:focus {
+    top: 0;
+  }
+}
+
+// Loading Spinner - Neon
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba($neon-cyan, 0.2);
+  border-top-color: $neon-cyan;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  box-shadow: 0 0 15px rgba($neon-cyan, 0.3);
+}
+
+// Toast/Notification Styles - Dark Mode
+.toast {
+  position: fixed;
+  bottom: $spacing-6;
+  right: $spacing-6;
+  padding: $spacing-4 $spacing-6;
+  @include glass-dark;
+  border-radius: $radius-xl;
+  z-index: $z-tooltip;
+  @include fade-in;
+  border: 1px solid $glass-border;
+
+  &--success {
+    background: rgba($color-success, 0.15);
+    border-color: rgba($color-success, 0.3);
+    backdrop-filter: blur($glass-blur);
+    box-shadow: 0 0 20px rgba($color-success, 0.2);
+  }
+
+  &--error {
+    background: rgba($color-error, 0.15);
+    border-color: rgba($color-error, 0.3);
+    backdrop-filter: blur($glass-blur);
+    box-shadow: 0 0 20px rgba($color-error, 0.2);
+  }
+
+  &--warning {
+    background: rgba($color-warning, 0.15);
+    border-color: rgba($color-warning, 0.3);
+    backdrop-filter: blur($glass-blur);
+    box-shadow: 0 0 20px rgba($color-warning, 0.2);
+  }
+}
+
+// Glassmorphism Utility Classes - Dark Mode
+.glass {
+  @include glass;
+}
+
+.glass-card {
+  @include glass-card;
+}
+
+.glass-dark {
+  @include glass-dark;
+}
+
+// Neon text utility
+.neon-text {
+  @include gradient-text;
+}
+
+.neon-glow {
+  @include neon-glow;
+}
+
+// Smooth hover transitions for interactive elements
+@media (hover: hover) {
+  .interactive {
+    transition: all $transition-base;
+    
+    &:hover {
+      transform: translateY(-2px);
+    }
+  }
+}
+
+// Mobile-first touch optimizations
+@media (hover: none) {
+  button, .btn, a {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+// =====================
+// SCROLL REVEAL ANIMATIONS
+// =====================
+
+// Base state for scroll reveal elements
+[data-reveal] {
+  opacity: 0;
+  transition: 
+    opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+    filter 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: opacity, transform, filter;
+}
+
+// Revealed state
+[data-reveal].revealed {
+  opacity: 1;
+  transform: none !important;
+  filter: none !important;
+}
+
+// Fade Up Animation
+[data-reveal="fade-up"] {
+  transform: translateY(60px);
+}
+
+// Fade Down Animation  
+[data-reveal="fade-down"] {
+  transform: translateY(-60px);
+}
+
+// Fade Left Animation
+[data-reveal="fade-left"] {
+  transform: translateX(60px);
+}
+
+// Fade Right Animation
+[data-reveal="fade-right"] {
+  transform: translateX(-60px);
+}
+
+// Scale Up Animation
+[data-reveal="scale-up"] {
+  transform: scale(0.8);
+}
+
+// Scale Down Animation
+[data-reveal="scale-down"] {
+  transform: scale(1.2);
+}
+
+// Blur Fade Animation
+[data-reveal="blur-fade"] {
+  transform: translateY(40px);
+  filter: blur(10px);
+}
+
+// Wipe Animation (like sand dissolving)
+[data-reveal="wipe-up"] {
+  clip-path: inset(100% 0 0 0);
+}
+
+[data-reveal="wipe-up"].revealed {
+  clip-path: inset(0 0 0 0);
+}
+
+[data-reveal="wipe-down"] {
+  clip-path: inset(0 0 100% 0);
+}
+
+[data-reveal="wipe-down"].revealed {
+  clip-path: inset(0 0 0 0);
+}
+
+[data-reveal="wipe-left"] {
+  clip-path: inset(0 100% 0 0);
+}
+
+[data-reveal="wipe-left"].revealed {
+  clip-path: inset(0 0 0 0);
+}
+
+[data-reveal="wipe-right"] {
+  clip-path: inset(0 0 0 100%);
+}
+
+[data-reveal="wipe-right"].revealed {
+  clip-path: inset(0 0 0 0);
+}
+
+// Gradient Mask Reveal (sand/dissolve effect)
+[data-reveal="dissolve"] {
+  mask-image: linear-gradient(to bottom, transparent 0%, black 0%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 0%);
+  transform: translateY(30px);
+}
+
+[data-reveal="dissolve"].revealed {
+  mask-image: linear-gradient(to bottom, black 100%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 100%, transparent 100%);
+}
+
+// Neon Glow Fade In
+[data-reveal="glow-in"] {
+  transform: translateY(40px);
+  filter: blur(5px);
+  text-shadow: none;
+  box-shadow: none;
+}
+
+[data-reveal="glow-in"].revealed {
+  text-shadow: 0 0 20px rgba($neon-cyan, 0.5);
+}
+
+// Stagger delays for child elements
+[data-reveal-stagger] > * {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: 
+    opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-reveal-stagger].revealed > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+// Stagger delay increments
+[data-reveal-stagger].revealed > *:nth-child(1) { transition-delay: 0.1s; }
+[data-reveal-stagger].revealed > *:nth-child(2) { transition-delay: 0.2s; }
+[data-reveal-stagger].revealed > *:nth-child(3) { transition-delay: 0.3s; }
+[data-reveal-stagger].revealed > *:nth-child(4) { transition-delay: 0.4s; }
+[data-reveal-stagger].revealed > *:nth-child(5) { transition-delay: 0.5s; }
+[data-reveal-stagger].revealed > *:nth-child(6) { transition-delay: 0.6s; }
+[data-reveal-stagger].revealed > *:nth-child(7) { transition-delay: 0.7s; }
+[data-reveal-stagger].revealed > *:nth-child(8) { transition-delay: 0.8s; }
+
+// Custom delay attribute support
+[data-delay="100"] { transition-delay: 0.1s !important; }
+[data-delay="200"] { transition-delay: 0.2s !important; }
+[data-delay="300"] { transition-delay: 0.3s !important; }
+[data-delay="400"] { transition-delay: 0.4s !important; }
+[data-delay="500"] { transition-delay: 0.5s !important; }
+[data-delay="600"] { transition-delay: 0.6s !important; }
+[data-delay="700"] { transition-delay: 0.7s !important; }
+[data-delay="800"] { transition-delay: 0.8s !important; }
+
+// Section divider with gradient fade
+.section-divider {
+  position: relative;
+  height: 120px;
+  margin: -60px 0;
+  pointer-events: none;
+  z-index: 2;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: linear-gradient(to bottom, transparent, $bg-void);
+  }
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: linear-gradient(to top, transparent, $bg-void);
+  }
+}
+
+// Smooth section transitions
+.section {
+  position: relative;
+  
+  // Top fade edge
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    background: linear-gradient(to bottom, $bg-void, transparent);
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.5;
+  }
+}

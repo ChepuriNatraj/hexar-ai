@@ -1,0 +1,464 @@
+@import '../../styles/mixins';
+
+// Hero Section - Dark Mode Neon Glassmorphism
+.hero {
+  position: relative;
+  min-height: calc(100vh - $header-height);
+  padding: $spacing-16 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  z-index: 1;
+
+  @include md {
+    padding: $spacing-20 0;
+  }
+}
+
+.container {
+  @include container;
+  position: relative;
+  z-index: 2;
+}
+
+.content {
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto $spacing-12;
+}
+
+.title {
+  @include heading-1;
+  margin-bottom: $spacing-6;
+  color: $text-primary;
+  @include fade-slide-up(0s);
+  
+  // Gradient text effect for key words
+  .highlight {
+    @include gradient-text-neon;
+  }
+  
+  @include lg {
+    font-size: 3.5rem;
+  }
+}
+
+.subtitle {
+  @include body-text;
+  max-width: 600px;
+  margin: 0 auto $spacing-8;
+  color: $text-secondary;
+  @include fade-slide-up(0.15s);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-4;
+  justify-content: center;
+  @include fade-slide-up(0.3s);
+}
+
+.primaryBtn {
+  @include button-primary;
+  padding: $spacing-4 $spacing-8;
+  font-size: $font-size-lg;
+}
+
+.secondaryBtn {
+  @include button-secondary;
+  padding: $spacing-4 $spacing-8;
+  font-size: $font-size-lg;
+}
+
+.ghostBtn {
+  @include button-ghost;
+  padding: $spacing-4 $spacing-6;
+  font-size: $font-size-lg;
+  color: $text-secondary;
+  background: $glass-bg;
+  backdrop-filter: blur(12px);
+  border: 1px solid $glass-border;
+  border-radius: $radius-xl;
+
+  &:hover {
+    border-color: rgba($neon-cyan, 0.3);
+    color: $neon-cyan;
+    background: rgba($neon-cyan, 0.05);
+  }
+}
+
+// Projects Grid
+.projectsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $spacing-4;
+  max-width: 900px;
+  margin: 0 auto;
+  @include fade-slide-up(0.45s);
+
+  @include md {
+    grid-template-columns: repeat(4, 1fr);
+    gap: $spacing-6;
+  }
+}
+
+.projectCard {
+  @include glass;
+  padding: $spacing-4;
+  text-decoration: none;
+  cursor: pointer;
+  text-align: center;
+  border-radius: $radius-2xl;
+  transition: 
+    transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+    background 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.4s ease;
+  will-change: transform;
+  
+  &:hover {
+    background: $glass-bg-hover;
+    border-color: $glass-border-hover;
+    box-shadow: $shadow-neon-cyan, $shadow-glass-lg;
+    transform: translateY(-12px) scale(1.03);
+    
+    .projectImage {
+      border-color: rgba($neon-cyan, 0.4);
+    }
+    
+    .projectTitle {
+      color: $neon-cyan;
+    }
+  }
+}
+
+.projectImage {
+  aspect-ratio: 4/3;
+  border-radius: $radius-lg;
+  overflow: hidden;
+  margin-bottom: $spacing-3;
+  background: linear-gradient(135deg, rgba($neon-cyan, 0.1) 0%, rgba($neon-purple, 0.1) 100%);
+  border: 1px solid $glass-border;
+  transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+.imagePlaceholder {
+  width: 100%;
+  height: 100%;
+  @include flex-center;
+  color: $text-muted;
+}
+
+.placeholderIcon {
+  width: 60%;
+  height: 60%;
+  opacity: 0.5;
+}
+
+.projectTitle {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  color: $text-primary;
+  transition: color 0.3s ease;
+
+  @include md {
+    font-size: $font-size-base;
+  }
+}
+
+.searchCard {
+  padding: $spacing-4;
+  text-decoration: none;
+  cursor: pointer;
+  @include flex-center;
+  background: linear-gradient(135deg, $neon-cyan 0%, $neon-blue 100%);
+  color: $bg-void;
+  border-radius: $radius-2xl;
+  border: 1px solid rgba($color-white, 0.2);
+  box-shadow: $shadow-neon-cyan;
+  transition: all $transition-base;
+  position: relative;
+  overflow: hidden;
+  
+  // Shine effect
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.3),
+      transparent
+    );
+    transition: left 0.5s ease;
+  }
+
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: $shadow-neon-cyan-intense;
+    
+    &::before {
+      left: 100%;
+    }
+  }
+}
+
+.searchContent {
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.searchLabel {
+  display: block;
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  margin-bottom: $spacing-2;
+}
+
+.searchMethods {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-2;
+  font-size: $font-size-sm;
+  opacity: 0.9;
+}
+
+.searchMethod {
+  font-size: $font-size-xs;
+}
+
+// Background Decorations - Neon Mesh
+.bgDecoration {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+// Floating Orb 1 - Cyan
+.bgCircle1 {
+  position: absolute;
+  top: -10%;
+  right: -5%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(
+    circle at 30% 30%,
+    rgba($neon-cyan, 0.25) 0%,
+    rgba($neon-cyan, 0.1) 30%,
+    transparent 70%
+  );
+  border-radius: 50%;
+  filter: blur(40px);
+  animation: floatOrb1 18s ease-in-out infinite;
+  
+  @include md {
+    width: 700px;
+    height: 700px;
+  }
+}
+
+// Floating Orb 2 - Purple
+.bgCircle2 {
+  position: absolute;
+  bottom: -20%;
+  left: -10%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(
+    circle at 70% 70%,
+    rgba($neon-purple, 0.2) 0%,
+    rgba($neon-purple, 0.08) 35%,
+    transparent 70%
+  );
+  border-radius: 50%;
+  filter: blur(50px);
+  animation: floatOrb2 22s ease-in-out infinite;
+  
+  @include md {
+    width: 900px;
+    height: 900px;
+  }
+}
+
+// Subtle Grid Overlay
+.bgGrid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    linear-gradient(rgba($neon-cyan, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba($neon-cyan, 0.02) 1px, transparent 1px);
+  background-size: 80px 80px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 30%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 30%, transparent 100%);
+  animation: gridPulse 8s ease-in-out infinite;
+}
+
+// Third Orb - Blue accent (center)
+.bgCircle3 {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(
+    circle,
+    rgba($neon-blue, 0.12) 0%,
+    rgba($neon-blue, 0.04) 40%,
+    transparent 70%
+  );
+  border-radius: 50%;
+  filter: blur(30px);
+  animation: floatOrb3 25s ease-in-out infinite;
+  
+  @include md {
+    width: 500px;
+    height: 500px;
+  }
+}
+
+// Floating Particles
+.particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+}
+
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: $neon-cyan;
+  border-radius: 50%;
+  opacity: 0;
+  box-shadow: 0 0 6px $neon-cyan, 0 0 12px rgba($neon-cyan, 0.5);
+  animation: particleFloat 12s ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
+  
+  &:nth-child(1) {
+    left: 10%;
+    top: 20%;
+  }
+  &:nth-child(2) {
+    left: 85%;
+    top: 15%;
+    background: $neon-purple;
+    box-shadow: 0 0 6px $neon-purple, 0 0 12px rgba($neon-purple, 0.5);
+  }
+  &:nth-child(3) {
+    left: 70%;
+    top: 70%;
+  }
+  &:nth-child(4) {
+    left: 20%;
+    top: 80%;
+    background: $neon-purple;
+    box-shadow: 0 0 6px $neon-purple, 0 0 12px rgba($neon-purple, 0.5);
+  }
+  &:nth-child(5) {
+    left: 50%;
+    top: 10%;
+    width: 3px;
+    height: 3px;
+  }
+  &:nth-child(6) {
+    left: 90%;
+    top: 50%;
+    width: 3px;
+    height: 3px;
+    background: $neon-blue;
+    box-shadow: 0 0 6px $neon-blue, 0 0 12px rgba($neon-blue, 0.5);
+  }
+}
+
+// Keyframe Animations
+@keyframes floatOrb1 {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.8;
+  }
+  25% {
+    transform: translate(-40px, 60px) scale(1.05);
+    opacity: 1;
+  }
+  50% {
+    transform: translate(30px, -30px) scale(0.95);
+    opacity: 0.7;
+  }
+  75% {
+    transform: translate(-20px, -50px) scale(1.02);
+    opacity: 0.9;
+  }
+}
+
+@keyframes floatOrb2 {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.7;
+  }
+  33% {
+    transform: translate(50px, -40px) scale(1.08);
+    opacity: 0.9;
+  }
+  66% {
+    transform: translate(-30px, 30px) scale(0.92);
+    opacity: 0.6;
+  }
+}
+
+@keyframes floatOrb3 {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.15);
+    opacity: 0.8;
+  }
+}
+
+@keyframes gridPulse {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes particleFloat {
+  0%, 100% {
+    opacity: 0;
+    transform: translateY(0) scale(0.5);
+  }
+  10% {
+    opacity: 0.8;
+    transform: translateY(-20px) scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: translateY(-80px) scale(0.8);
+  }
+  90% {
+    opacity: 0.4;
+    transform: translateY(-140px) scale(0.6);
+  }
+}

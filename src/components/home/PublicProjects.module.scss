@@ -1,0 +1,246 @@
+@import '../../styles/mixins';
+
+// Public Projects Section - Dark Mode Neon Glassmorphism
+.publicProjects {
+  padding: $spacing-20 0;
+  background: rgba(255, 255, 255, 0.01);
+  backdrop-filter: blur(8px);
+  position: relative;
+  z-index: 1;
+}
+
+.container {
+  @include container;
+}
+
+.header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto $spacing-10;
+}
+
+.title {
+  @include heading-2;
+  margin-bottom: $spacing-4;
+  @include gradient-text;
+}
+
+.subtitle {
+  @include body-text;
+  color: $text-secondary;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-2;
+  justify-content: center;
+  margin-bottom: $spacing-10;
+}
+
+.filterBtn {
+  @include button-base;
+  padding: $spacing-2 $spacing-5;
+  font-size: $font-size-sm;
+  background: $glass-bg;
+  backdrop-filter: blur(8px);
+  color: $text-secondary;
+  border: 1px solid $glass-border;
+  border-radius: $radius-xl;
+
+  &:hover {
+    border-color: rgba($neon-cyan, 0.5);
+    color: $neon-cyan;
+    background: rgba($neon-cyan, 0.1);
+  }
+
+  &.active {
+    background: linear-gradient(135deg, $neon-cyan 0%, $neon-blue 100%);
+    color: $bg-void;
+    border-color: transparent;
+    box-shadow: $shadow-neon-cyan;
+  }
+}
+
+.grid {
+  display: grid;
+  gap: $spacing-6;
+  max-width: 1000px;
+  margin: 0 auto;
+  
+  // Mobile: 1 column
+  grid-template-columns: 1fr;
+
+  @include md {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include lg {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.card {
+  position: relative;
+  @include glass;
+  border-radius: $radius-xl;
+  padding: $spacing-6;
+  transition: 
+    transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+    background 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.4s ease;
+  will-change: transform;
+
+  &:hover {
+    transform: translateY(-10px) scale(1.02);
+    background: $glass-bg-hover;
+    border-color: $glass-border-hover;
+    box-shadow: $shadow-neon-cyan, $shadow-glass-lg;
+
+    .viewLink {
+      color: $neon-cyan;
+      gap: $spacing-3;
+    }
+  }
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-1;
+  padding: $spacing-1 $spacing-2;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+  color: $neon-cyan;
+  background: rgba($neon-cyan, 0.15);
+  border: 1px solid rgba($neon-cyan, 0.2);
+  border-radius: $radius-lg;
+  margin-bottom: $spacing-3;
+}
+
+.time {
+  display: block;
+  font-size: $font-size-xs;
+  color: $text-muted;
+  margin-bottom: $spacing-3;
+}
+
+.cardTitle {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  margin-bottom: $spacing-2;
+  color: $text-primary;
+}
+
+.cardDescription {
+  font-size: $font-size-sm;
+  color: $text-secondary;
+  line-height: $line-height-relaxed;
+  margin-bottom: $spacing-4;
+}
+
+.viewLink {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-1;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  color: $neon-cyan;
+  text-decoration: none;
+  transition: all $transition-fast;
+
+  &:hover {
+    gap: $spacing-2;
+    text-shadow: 0 0 10px rgba($neon-cyan, 0.5);
+  }
+}
+
+.joinCard {
+  background: linear-gradient(135deg, $neon-cyan 0%, $neon-blue 100%);
+  border-radius: $radius-xl;
+  padding: $spacing-6;
+  color: $bg-void;
+  @include flex-center;
+  text-align: center;
+  box-shadow: $shadow-neon-cyan;
+  position: relative;
+  overflow: hidden;
+  
+  // Shine effect
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent
+    );
+    animation: shine 3s ease-in-out infinite;
+  }
+}
+
+@keyframes shine {
+  0% { left: -100%; }
+  50%, 100% { left: 100%; }
+}
+
+.joinContent {
+  padding: $spacing-4;
+  position: relative;
+  z-index: 1;
+}
+
+.joinTitle {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  margin-bottom: $spacing-2;
+  color: $bg-void;
+}
+
+.joinDescription {
+  font-size: $font-size-sm;
+  color: rgba($bg-void, 0.8);
+  margin-bottom: $spacing-4;
+}
+
+.joinBtn {
+  @include button-base;
+  background: $bg-void;
+  color: $neon-cyan;
+  padding: $spacing-2 $spacing-4;
+  font-size: $font-size-sm;
+  border: 1px solid transparent;
+
+  &:hover {
+    background: rgba($bg-void, 0.9);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  }
+}
+
+.viewAll {
+  text-align: center;
+  margin-top: $spacing-10;
+}
+
+.viewAllLink {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-2;
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  color: $neon-cyan;
+  text-decoration: none;
+  transition: all $transition-fast;
+
+  &:hover {
+    gap: $spacing-3;
+    text-shadow: 0 0 15px rgba($neon-cyan, 0.5);
+  }
+}

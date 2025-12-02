@@ -1,0 +1,188 @@
+// =========================================
+// SCSS Variables
+// Hexar.ai - Design System Variables
+// Dark Mode Neon Glassmorphism Theme
+// =========================================
+
+// =====================
+// DARK MODE COLOR PALETTE
+// =====================
+
+// Background - Deep Void
+$bg-void: #050511;
+$bg-void-lighter: #0a0a1a;
+$bg-void-card: #0c0c1d;
+
+// Neon Accent Colors
+$neon-cyan: #00f3ff;
+$neon-purple: #bd00ff;
+$neon-pink: #ff00aa;
+$neon-blue: #0066ff;
+
+// Primary Colors (using neon cyan as primary)
+$color-primary: $neon-cyan;
+$color-primary-light: lighten($neon-cyan, 10%);
+$color-primary-dark: darken($neon-cyan, 15%);
+$color-primary-darker: #004d5c;
+
+$color-secondary: $neon-purple;
+$color-accent: $neon-cyan;
+$color-selection: rgba($neon-cyan, 0.2);
+$color-selection-solid: $neon-cyan;
+$color-resize: $neon-cyan;
+$color-edge: rgba(255, 255, 255, 0.15);
+
+// Neutral Colors (Dark Mode)
+$color-white: #FFFFFF;
+$color-gray-50: #1a1a2e;
+$color-gray-100: #16162a;
+$color-gray-200: #12122a;
+$color-gray-300: #2a2a4a;
+$color-gray-400: #4a4a6a;
+$color-gray-500: #6a6a8a;
+$color-gray-600: #8a8aaa;
+$color-gray-700: #a0a0b0;
+$color-gray-800: #c0c0d0;
+$color-gray-900: #e0e0f0;
+$color-black: #050511;
+
+// Semantic Colors (Neon variants)
+$color-success: #00ff88;
+$color-warning: #ffaa00;
+$color-error: #ff3366;
+$color-info: $neon-cyan;
+
+// Background Colors
+$bg-primary: $bg-void;
+$bg-secondary: $bg-void-lighter;
+$bg-dark: $bg-void;
+$bg-gradient: linear-gradient(135deg, $bg-void 0%, $bg-void-lighter 100%);
+$bg-gradient-light: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
+
+// =====================
+// GLASSMORPHISM - DARK MODE
+// =====================
+$glass-bg: rgba(255, 255, 255, 0.03);
+$glass-bg-light: rgba(255, 255, 255, 0.05);
+$glass-bg-dark: rgba(5, 5, 17, 0.8);
+$glass-bg-hover: rgba(255, 255, 255, 0.08);
+$glass-border: rgba(255, 255, 255, 0.08);
+$glass-border-hover: rgba($neon-cyan, 0.5);
+$glass-border-dark: rgba(255, 255, 255, 0.05);
+$glass-blur: 24px;
+$glass-blur-light: 16px;
+$glass-blur-heavy: 32px;
+$glass-saturate: 180%;
+
+// Text Colors (Dark Mode)
+$text-primary: #ffffff;
+$text-secondary: #a0a0a0;
+$text-muted: #707080;
+$text-light: $color-white;
+$text-link: $neon-cyan;
+
+// =====================
+// NEON GLOW SHADOWS
+// =====================
+$shadow-neon-cyan: 0 0 20px rgba($neon-cyan, 0.4), 0 0 40px rgba($neon-cyan, 0.2);
+$shadow-neon-purple: 0 0 20px rgba($neon-purple, 0.4), 0 0 40px rgba($neon-purple, 0.2);
+$shadow-neon-cyan-intense: 0 0 30px rgba($neon-cyan, 0.6), 0 0 60px rgba($neon-cyan, 0.3), 0 0 100px rgba($neon-cyan, 0.1);
+$shadow-neon-purple-intense: 0 0 30px rgba($neon-purple, 0.6), 0 0 60px rgba($neon-purple, 0.3);
+$shadow-neon-mixed: 0 0 20px rgba($neon-cyan, 0.3), 0 0 40px rgba($neon-purple, 0.2);
+
+// Typography
+$font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+$font-family-mono: 'Fira Code', 'Consolas', monospace;
+
+// Font Sizes
+$font-size-xs: 0.75rem;     // 12px
+$font-size-sm: 0.875rem;    // 14px
+$font-size-base: 1rem;      // 16px
+$font-size-lg: 1.125rem;    // 18px
+$font-size-xl: 1.25rem;     // 20px
+$font-size-2xl: 1.5rem;     // 24px
+$font-size-3xl: 1.875rem;   // 30px
+$font-size-4xl: 2.25rem;    // 36px
+$font-size-5xl: 3rem;       // 48px
+$font-size-6xl: 3.75rem;    // 60px
+
+// Font Weights
+$font-weight-light: 300;
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+$font-weight-extrabold: 800;
+
+// Line Heights
+$line-height-tight: 1.25;
+$line-height-normal: 1.5;
+$line-height-relaxed: 1.625;
+
+// Spacing Scale
+$spacing-0: 0;
+$spacing-1: 0.25rem;   // 4px
+$spacing-2: 0.5rem;    // 8px
+$spacing-3: 0.75rem;   // 12px
+$spacing-4: 1rem;      // 16px
+$spacing-5: 1.25rem;   // 20px
+$spacing-6: 1.5rem;    // 24px
+$spacing-8: 2rem;      // 32px
+$spacing-10: 2.5rem;   // 40px
+$spacing-12: 3rem;     // 48px
+$spacing-16: 4rem;     // 64px
+$spacing-20: 5rem;     // 80px
+$spacing-24: 6rem;     // 96px
+
+// Border Radius
+$radius-none: 0;
+$radius-sm: 0.25rem;   // 4px
+$radius-md: 0.375rem;  // 6px
+$radius-lg: 0.5rem;    // 8px
+$radius-xl: 0.75rem;   // 12px
+$radius-2xl: 1rem;     // 16px
+$radius-3xl: 1.5rem;   // 24px
+$radius-full: 9999px;
+
+// Shadows - Enhanced for Dark Mode Neon Glassmorphism
+$shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -2px rgba(0, 0, 0, 0.3);
+$shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -4px rgba(0, 0, 0, 0.4);
+$shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.4);
+$shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+$shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.3);
+$shadow-glow: $shadow-neon-cyan;
+$shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.3);
+$shadow-glass-lg: 0 16px 48px rgba(0, 0, 0, 0.4);
+
+// Transitions
+$transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+$transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+$transition-slow: 350ms cubic-bezier(0.4, 0, 0.2, 1);
+$transition-slower: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+
+// Breakpoints
+$breakpoint-sm: 640px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1280px;
+$breakpoint-2xl: 1536px;
+
+// Container
+$container-max-width: 1280px;
+$container-padding: $spacing-4;
+
+// Z-Index Scale
+$z-dropdown: 1000;
+$z-sticky: 1020;
+$z-fixed: 1030;
+$z-modal-backdrop: 1040;
+$z-modal: 1050;
+$z-popover: 1060;
+$z-tooltip: 1070;
+
+// Component Specific
+$header-height: 72px;
+$footer-height: auto;
+$sidebar-width: 280px;
+$canvas-toolbar-height: 56px;
